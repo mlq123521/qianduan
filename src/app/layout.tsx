@@ -13,18 +13,14 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "留言本",
-  description: "一个简单的留言板应用",
+  title: "牛的起源 — 从野牛到人类最重要的伙伴",
+  description: "探索牛是如何被人类驯化，以及它们对文明发展的深远影响",
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="zh-CN" className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-      <body className="min-h-screen bg-gray-50">{children}</body>
+      <body className="min-h-screen bg-amber-50">{children}</body>
     </html>
   );
 }
