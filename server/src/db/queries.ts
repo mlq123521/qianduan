@@ -20,7 +20,7 @@ export async function getEvents(params: {
     .select()
     .from(events)
     .where(conditions.length ? and(...conditions) : undefined)
-    .orderBy(events.date);
+    .orderBy(events.date, 'desc');
 
   return result;
 }
