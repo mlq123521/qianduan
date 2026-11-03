@@ -14,6 +14,8 @@ async function load() {
   loading.value = true
   try {
     events.value = await fetchEvents()
+    // 反转使最新的在上面
+    events.value.reverse()
   } catch {
     alert('加载失败')
   } finally {
