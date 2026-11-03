@@ -1,0 +1,12 @@
+{
+  "name": "qianduan",
+  "version": "1.0.0",
+  "description": "前端项目",
+  "main": "hello.js",
+  "scripts": {
+    "start": "node hello.js",
+    "lint": "echo 'Lint OK'",
+    "test": "node --test"
+  },
+  "devDependencies": {}
+}
