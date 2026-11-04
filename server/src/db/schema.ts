@@ -2,6 +2,8 @@ import { pgTable, serial, varchar, text, timestamp, jsonb, pgEnum } from 'drizzl
 
 export const eventTypeEnum = pgEnum('event_type', ['feature', 'bugfix', 'doc', 'other']);
 
+export type EventType = (typeof eventTypeEnum.enumValues)[number];
+
 export const events = pgTable('events', {
   id: serial('id').primaryKey(),
   title: varchar('title', { length: 255 }).notNull(),

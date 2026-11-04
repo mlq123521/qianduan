@@ -1,6 +1,10 @@
-import { eq, and, gte, lte, ilike } from 'drizzle-orm';
-import { events, type Event, type NewEvent } from '../db/schema.js';
+import { eq, and, gte, lte, ilike, desc } from 'drizzle-orm';
+import { events, eventTypeEnum, type Event, type EventType, type NewEvent } from '../db/schema.js';
 import { db } from '../db/index.js';
+
+function isEventType(value: string): value is EventType {
+  return (eventTypeEnum.enumValues as readonly string[]).includes(value);
+}
 
 export async function getEvents(params: {
   type?: string;
@@ -11,7 +15,7 @@ export async function getEvents(params: {
   const { type, startDate, endDate, search } = params;
   const conditions = [];
 
-  if (type) conditions.push(eq(events.type, type));
+  if (type && isEventType(type)) conditions.push(eq(events.type, type));
   if (startDate) conditions.push(gte(events.date, new Date(startDate)));
   if (endDate) conditions.push(lte(events.date, new Date(endDate)));
   if (search) conditions.push(ilike(events.title, `%${search}%`));
@@ -20,7 +24,7 @@ export async function getEvents(params: {
     .select()
     .from(events)
     .where(conditions.length ? and(...conditions) : undefined)
-    .orderBy(events.date, 'desc');
+    .orderBy(desc(events.date));
 
   return result;
 }
